@@ -1,0 +1,19 @@
+                """
+                if args.loss == 'bce':
+                    predicted_codes = (output_flat > t).float() * 1
+                    ham_dist = hamming_distance(predicted_codes, target_codes)
+                    # in the ecoc case we need to convert back to integers
+                    accuracy = get_code_accuracy(predicted_codes, target_codes)
+                    total_acc += accuracy
+                    total_ham += ham_dist
+                elif args.codebook:
+                    # In the case of not using ecoc, we need to get index of max from each row
+                    predicted_tokens, predict_inds = output_flat.max(1)
+                    predict_codes = corpus.error_codes[predict_inds]
+                    ham_dist = hamming_distance(predict_codes, target_codes)
+                    # in the normal case we just compare class indices
+                    accuracy = get_accuracy(predict_inds, targets)
+                    total_acc += accuracy
+                    total_ham += ham_dist
+
+                """
